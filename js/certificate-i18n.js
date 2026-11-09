@@ -70,7 +70,7 @@
     },
     "hack-fix-ccsc": {
       category: "Cybersecurity",
-      description: "Entry-level cybersecurity certification focused on fundamentals and career preparation.",
+      description: "Certificate of completion in cybersecurity fundamentals and career preparation.",
       learned: [
         "Information security fundamentals and the initial mindset for cybersecurity work.",
         "Threat, risk, best-practice, and digital-environment protection concepts.",
@@ -314,7 +314,7 @@
   );
   document.querySelector('meta[property="og:description"]')?.setAttribute(
     "content",
-    "Detailed view of Lorran Daniel's certifications, course certificates, and technical skills.",
+    "Detailed view of Lorran Daniel's certificates and technical skills.",
   );
   translateTextNodes(document.body);
   translateAttributes();

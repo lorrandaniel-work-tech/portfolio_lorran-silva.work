@@ -22,14 +22,16 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
-  min-width: 320px;
+  min-width: 0;
   margin: 0;
   background: var(--canvas);
   color: var(--text);
   line-height: 1.6;
+  overflow-wrap: break-word;
 }
 
 button,
@@ -96,6 +98,7 @@ select:focus-visible {
 
 .header-actions {
   display: flex;
+  min-width: 0;
   align-items: center;
   gap: 10px;
 }
@@ -109,6 +112,8 @@ select:focus-visible {
 
 .back-link {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   min-height: 40px;
   align-items: center;
   gap: 9px;
@@ -117,7 +122,8 @@ select:focus-visible {
   color: var(--text);
   font-size: 0.9rem;
   font-weight: 700;
-  padding: 0 13px;
+  line-height: 1.4;
+  padding: 8px 13px;
   text-decoration: none;
   transition: border-color 160ms ease, background-color 160ms ease;
 }
@@ -155,6 +161,16 @@ select:focus-visible {
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
   align-items: end;
   gap: 64px;
+}
+
+.project-hero-grid > *,
+.switcher-content > *,
+.section-heading > *,
+.details-grid > *,
+.architecture-section > *,
+.demo-grid > *,
+.monitoring-layout > * {
+  min-width: 0;
 }
 
 .eyebrow,
@@ -208,6 +224,30 @@ h3 {
   font-size: 1.1rem;
 }
 
+.development-note {
+  min-width: 0;
+  max-width: 760px;
+  margin-top: 24px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cyan);
+  border-radius: 7px;
+  background: var(--surface);
+  padding: 16px 18px;
+}
+
+.development-note strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 0.94rem;
+}
+
+.development-note p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .hero-actions,
 .demo-actions,
 .tech-list,
@@ -224,6 +264,8 @@ h3 {
 
 .button {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   min-height: 42px;
   align-items: center;
   justify-content: center;
@@ -234,7 +276,10 @@ h3 {
   cursor: pointer;
   font-size: 0.92rem;
   font-weight: 800;
-  padding: 0 15px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  padding: 8px 15px;
+  text-align: center;
   text-decoration: none;
   transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
 }
@@ -295,6 +340,7 @@ h3 {
 .switcher-content select {
   min-width: 0;
   min-height: 42px;
+  max-width: 100%;
   border: 1px solid var(--line-strong);
   border-radius: 7px;
   background: var(--surface);
@@ -421,6 +467,7 @@ h3 {
 
 .flow-list li {
   position: relative;
+  min-width: 0;
   min-height: 92px;
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -428,6 +475,7 @@ h3 {
   color: var(--soft, #dbe0ef);
   font-size: 0.9rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
   padding: 14px;
 }
 
@@ -455,6 +503,7 @@ h3 {
 .table-pill,
 .state-pill {
   display: inline-flex;
+  max-width: 100%;
   min-height: 28px;
   align-items: center;
   border: 1px solid var(--line);
@@ -463,6 +512,7 @@ h3 {
   color: var(--soft, #dbe0ef);
   font-size: 0.78rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
   padding: 0 10px;
 }
 
@@ -523,7 +573,10 @@ h3 {
 }
 
 .data-table-wrap {
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
 }
 
 .data-table {
@@ -625,6 +678,7 @@ h3 {
 .terminal-line {
   border-left-color: var(--accent);
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .monitoring-layout {
@@ -699,6 +753,7 @@ h3 {
 }
 
 .legend span::before {
+  flex-shrink: 0;
   width: 8px;
   height: 8px;
   margin-right: 7px;
@@ -812,7 +867,7 @@ h3 {
   }
 
   .switcher-content {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     padding: 18px 0;
   }
 
@@ -823,6 +878,10 @@ h3 {
 }
 
 @media (max-width: 680px) {
+  html {
+    scroll-padding-top: 136px;
+  }
+
   .shell {
     width: min(100% - 30px, 1180px);
   }
@@ -832,17 +891,28 @@ h3 {
     min-height: 64px;
   }
 
+  .header-content {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 0;
+  }
+
   .back-link {
-    min-height: 38px;
-    padding: 0 10px;
+    flex: 1 1 0;
+    min-height: 44px;
+    justify-content: center;
+    padding: 8px 10px;
   }
 
   .header-actions {
+    width: 100%;
     gap: 8px;
   }
 
   .project-language-select {
-    min-height: 38px;
+    flex: 0 0 60px;
+    min-height: 44px;
   }
 
   .project-hero,
@@ -851,11 +921,11 @@ h3 {
   }
 
   h1 {
-    font-size: 2.6rem;
+    font-size: clamp(2.05rem, 8vw, 2.6rem);
   }
 
   h2 {
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 6vw, 1.75rem);
   }
 
   .project-hero-grid,
@@ -893,6 +963,39 @@ h3 {
 
   .switcher-content select {
     width: 100%;
+    min-height: 44px;
+  }
+
+  .page-nav a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .metric-tab {
+    min-height: 44px;
+  }
+
+  .hero-actions,
+  .demo-actions {
+    width: 100%;
+  }
+
+  .hero-actions > .button,
+  .demo-actions > .button {
+    flex: 1 1 180px;
+    min-height: 44px;
+  }
+
+  .demo-panel,
+  .chart-panel,
+  .summary-panel,
+  .output-panel {
+    padding: 16px;
+  }
+
+  .data-table {
+    min-width: 420px;
   }
 
   .chart-canvas {
@@ -919,14 +1022,6 @@ h3 {
 }
 
 @media (max-width: 390px) {
-  h1 {
-    font-size: 2.25rem;
-  }
-
-  .back-link {
-    font-size: 0.78rem;
-  }
-
   .flow-list {
     grid-template-columns: 1fr;
   }

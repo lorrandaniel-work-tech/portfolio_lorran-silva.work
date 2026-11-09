@@ -11,16 +11,24 @@
     <meta property="og:title" content="Detalhe do Certificado | Lorran Daniel" />
     <meta
       property="og:description"
-      content="Visualização detalhada das certificações, certificados e competências técnicas de Lorran Daniel."
+      content="Visualização detalhada dos certificados e competências técnicas de Lorran Daniel."
     />
     <meta property="og:type" content="article" />
-    <link rel="stylesheet" href="css/document-viewer.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="favicon.ico?v=20261102" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png?v=20261102" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png?v=20261102" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+    <link rel="stylesheet" href="css/document-viewer.css?v=20261102-portfolio" />
+    <link rel="stylesheet" href="css/style.css?v=20261102-portfolio" />
+    <link rel="stylesheet" href="css/brand.css?v=0.6.15" />
   </head>
   <body>
     <header class="site-header">
       <nav class="container nav" aria-label="Navegação principal">
-        <a class="brand" href="index.html">Lorran Daniel</a>
+        <a class="brand" href="index.html">
+          <img class="brand-avatar" src="img/lorran-daniel-avatar.jpg?v=0.6.15" width="44" height="44" alt="" />
+          <span>Lorran Daniel</span>
+        </a>
         <div class="certificate-nav-actions">
           <button class="button" type="button" data-back>Voltar para o portfólio</button>
           <select id="languageSelect" class="certificate-language-select" aria-label="Selecionar idioma">
@@ -98,7 +106,7 @@
           category: "Cybersecurity",
           issuer: "Hack & Fix Academy",
           description:
-            "Certificação de entrada em cybersecurity, com foco em fundamentos e preparação para carreira.",
+            "Certificado de conclusão em fundamentos de cybersecurity e preparação para carreira.",
           pdf: "certificados/hack-fix-cybersecurity-career-starter-ccsc.pdf",
           details: [
             ["Emissor", "Hack & Fix Academy"],
@@ -401,7 +409,7 @@
           return;
         }
 
-        window.location.href = `index.html?lang=${pageLanguage}#certificacoes`;
+        window.location.href = `index.html?lang=${pageLanguage}#certificados`;
       }
 
       document.querySelectorAll("[data-back]").forEach((button) => {
@@ -428,7 +436,12 @@
         const details = data.details
           .map(
             ([label, value]) => `
-              <div class="meta-item">
+              <div class="meta-item${
+                /^(?:credencial|código|id(?: do certificado)?|número do certificado)$/i.test(label) ||
+                /^(?:UC-)?[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/i.test(value)
+                  ? " meta-item--identifier"
+                  : ""
+              }">
                 <strong>${label}</strong>
                 <span>${value}</span>
               </div>
@@ -498,6 +511,6 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     </script>
-    <script src="js/certificate-i18n.js?v=20261030-index"></script>
+    <script src="js/certificate-i18n.js?v=20261102-portfolio"></script>
   </body>
 </html>

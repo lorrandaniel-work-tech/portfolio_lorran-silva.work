@@ -9,6 +9,9 @@
     "Laboratórios locais | Lorran Daniel": "Local labs | Lorran Daniel",
     "Laboratório local": "Local lab",
     "Carregando projeto...": "Loading project...",
+    "Projeto em desenvolvimento": "Project in development",
+    "Este laboratório e suas demonstrações estão em evolução, com melhorias contínuas na implementação e na documentação.":
+      "This lab and its demonstrations are evolving, with continuous improvements to implementation and documentation.",
     "Voltar aos projetos": "Back to projects",
     "Abrir demonstração": "Open demo",
     "Modo de demonstração": "Demo mode",

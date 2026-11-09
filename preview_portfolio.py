@@ -14,6 +14,7 @@ PUBLIC_PAGES = {
     "portfolio_en.html",
     "certificado.html",
     "curriculo.html",
+    "favicon.ico",
 }
 PUBLIC_FOLDERS = {
     "css", "js", "img", "certificados", "certificate_previews", "curriculos", "projetos",

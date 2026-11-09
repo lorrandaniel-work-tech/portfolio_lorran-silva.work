@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico?v=20261102" sizes="any" />
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png?v=20261102" sizes="16x16" />
+    <link rel="icon" type="image/png" href="img/favicon-32x32.png?v=20261102" sizes="32x32" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png?v=20261102" sizes="180x180" />
     <title>Lorran Daniel | Infraestrutura, Cloud e Cybersecurity</title>
     <meta
       name="description"
@@ -70,27 +74,65 @@
       }
 
       .nav {
-        display: flex;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-areas: "brand links controls";
         align-items: center;
-        justify-content: space-between;
-        gap: 24px;
+        gap: 18px;
         padding: 16px 0;
       }
 
       .brand {
-        flex-shrink: 0;
+        grid-area: brand;
+        justify-self: start;
         font-weight: 700;
         letter-spacing: 0.02em;
       }
 
       .nav-links {
+        grid-area: links;
         display: flex;
         min-width: 0;
-        overflow-x: auto;
         align-items: center;
-        gap: 24px;
+        justify-content: flex-end;
+        gap: 18px;
         color: var(--muted);
         font-size: 0.94rem;
+      }
+
+      .nav-links[hidden],
+      .nav-toggle[hidden] {
+        display: none !important;
+      }
+
+      .nav-controls {
+        grid-area: controls;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .nav-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--panel);
+        color: var(--text);
+        padding: 0 12px;
+        font: inherit;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .nav-toggle:focus-visible,
+      .nav-links a:focus-visible,
+      .language-select:focus-visible {
+        outline: 3px solid var(--sky);
+        outline-offset: 3px;
       }
 
       .nav-links a:hover {
@@ -118,7 +160,7 @@
       }
 
       .language-select {
-        min-height: 38px;
+        min-height: 44px;
         border: 1px solid rgba(50, 53, 244, 0.7);
         border-radius: 6px;
         background: rgba(50, 53, 244, 0.1);
@@ -207,8 +249,12 @@
         border-radius: 8px;
         padding: 0 20px;
         border: 1px solid rgba(255, 255, 255, 0.15);
+        background: transparent;
         color: white;
+        font: inherit;
         font-weight: 700;
+        text-align: center;
+        cursor: pointer;
         transition: 180ms ease;
       }
 
@@ -230,8 +276,9 @@
 
       .stats {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 12px;
+        width: 100%;
         max-width: 660px;
         margin-top: 48px;
         text-align: left;
@@ -258,7 +305,6 @@
       .skills-panel,
       .card,
       .roadmap-card,
-      .cert-card,
       .certificate-card {
         border: 1px solid var(--border);
         border-radius: 8px;
@@ -367,6 +413,22 @@
         object-fit: cover;
         object-position: center 30%;
         filter: saturate(1.03) contrast(1.04);
+      }
+
+      @media (min-width: 1220px) {
+        .container.nav,
+        .container.hero {
+          width: min(100% - 40px, 1360px);
+        }
+
+        .profile-photo {
+          max-height: 680px;
+        }
+
+        .hero-text {
+          max-width: 660px;
+          text-wrap: balance;
+        }
       }
 
       .profile-caption {
@@ -647,6 +709,10 @@
       }
 
       .language-dialog {
+        max-height: calc(100vh - 48px);
+        max-height: calc(100dvh - 48px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
         width: min(100%, 520px);
         border: 1px solid rgba(199, 210, 254, 0.28);
         border-radius: 8px;
@@ -753,7 +819,6 @@
       }
 
       .card h3,
-      .cert-card h3,
       .certificate-card h3,
       .roadmap-card h3 {
         margin-bottom: 0;
@@ -851,8 +916,7 @@
           repeating-radial-gradient(circle at 50% 50%, rgba(50, 53, 244, 0.22) 0 1px, transparent 1px 18px);
       }
 
-      .roadmap-card,
-      .cert-card {
+      .roadmap-card {
         padding: 20px;
       }
 
@@ -963,42 +1027,11 @@
       }
 
       .roadmap-card p,
-      .cert-card p,
       .certificate-card p {
         margin: 12px 0 0;
         color: var(--muted);
         font-size: 0.94rem;
         line-height: 1.7;
-      }
-
-      .cert-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
-      }
-
-      .cert-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 24px;
-      }
-
-      .cert-date {
-        color: #71717a;
-        font-size: 0.9rem;
-        white-space: nowrap;
-      }
-
-      .cert-org {
-        margin-bottom: 20px;
-        border: 1px solid rgba(199, 210, 254, 0.2);
-        border-radius: 6px;
-        background: rgba(199, 210, 254, 0.1);
-        color: #e0e7ff;
-        padding: 18px 16px;
-        font-weight: 800;
       }
 
       .meta-list {
@@ -1015,8 +1048,8 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         padding-bottom: 8px;
         color: var(--muted);
-        font-size: 0.88rem;
-        line-height: 1.45;
+        font-size: 14px;
+        line-height: 1.5;
       }
 
       .meta-item:last-child {
@@ -1059,26 +1092,118 @@
       .certificate-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
+        gap: 20px;
       }
 
       .certificate-card {
-        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .filter-section article[hidden] {
+        display: none;
+      }
+
+      .certificate-card > .badge {
+        align-self: flex-start;
       }
 
       .certificate-card h3 {
-        margin-top: 14px;
-        font-size: 1rem;
-        line-height: 1.4;
+        margin-top: 16px;
+        font-size: 17px;
+        line-height: 1.45;
       }
 
-      .certificate-card p {
-        min-height: 48px;
+      .certificate-card .meta-list {
+        margin-bottom: 20px;
       }
 
       .certificate-card .cert-link {
-        min-height: 40px;
-        margin-top: 16px;
+        align-self: flex-start;
+        min-height: 44px;
+        margin-top: auto;
+      }
+
+      /* Neighboring cards share the heights of the heading, summary and five fields. */
+      @media (min-width: 681px) {
+        @supports (grid-template-rows: subgrid) {
+          .certificate-card {
+            display: grid;
+            grid-row: span 9;
+            grid-template-rows: subgrid;
+            grid-template-columns: minmax(0, 1fr);
+            row-gap: 0;
+          }
+
+          .certificate-card .meta-list {
+            grid-row: span 5;
+            grid-template-rows: subgrid;
+          }
+
+          .certificate-card > .badge,
+          .certificate-card .cert-link {
+            justify-self: start;
+          }
+        }
+      }
+
+      .meta-identifier {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .meta-identifier span {
+        width: 100%;
+        font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+        line-height: 1.6;
+        white-space: nowrap;
+        overflow-wrap: normal;
+        word-break: normal;
+        text-align: left;
+      }
+
+      .project-notice {
+        margin-bottom: 24px;
+        border: 1px solid rgba(199, 210, 254, 0.2);
+        border-radius: 8px;
+        background: rgba(199, 210, 254, 0.05);
+        padding: 18px 20px;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .project-notice strong {
+        color: #e0e7ff;
+        font-size: 15px;
+      }
+
+      .project-notice p {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+
+      @media (max-width: 1100px) {
+        .certificate-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 680px) {
+        .certificate-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 360px) {
+        .certificate-card {
+          padding: 16px;
+        }
+
+        .meta-identifier span {
+          font-size: 11px;
+        }
       }
 
       .contact {
@@ -1098,13 +1223,119 @@
         line-height: 1.8;
       }
 
-      .contact .actions {
-        justify-content: center;
+      .contact-methods {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        max-width: 640px;
+        margin: 28px auto 0;
+      }
+
+      .contact-methods .button {
+        width: 100%;
+        min-height: 48px;
+      }
+
+      .contact [hidden] {
+        display: none;
+      }
+
+      .contact-address {
+        margin: 20px 0 0;
+        color: var(--soft);
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+      }
+
+      .contact-help a {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        color: var(--sky);
+      }
+
+      .contact-help {
+        max-width: 560px;
+        margin: 12px auto 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 480px) {
+        .contact-methods {
+          grid-template-columns: minmax(0, 1fr);
+        }
       }
 
       .contact a[href^="mailto:"] {
         max-width: 100%;
         overflow-wrap: anywhere;
+      }
+
+      .hero > *,
+      .section-grid > *,
+      .card,
+      .certificate-card,
+      .roadmap-card,
+      .experience-entry,
+      .stat,
+      .meta-item > * {
+        min-width: 0;
+      }
+
+      .card h3,
+      .certificate-card h3,
+      .experience-entry h3 {
+        overflow-wrap: anywhere;
+      }
+
+      section[id],
+      .hero[id] {
+        scroll-margin-top: 88px;
+      }
+
+      @media (max-width: 1100px) {
+        .nav {
+          grid-template-columns: minmax(0, 1fr) auto;
+          grid-template-areas:
+            "brand controls"
+            "links links";
+          gap: 0 12px;
+          padding: 14px 0;
+        }
+
+        .nav-toggle {
+          display: inline-flex;
+        }
+
+        .nav-links {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          align-items: stretch;
+          justify-content: stretch;
+          gap: 8px;
+          max-height: calc(100vh - 96px);
+          max-height: calc(100dvh - 96px);
+          overflow-y: auto;
+          margin-top: 14px;
+          padding: 2px 2px 4px;
+        }
+
+        .nav-links a {
+          display: flex;
+          align-items: center;
+          min-height: 44px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 10px 12px;
+          overflow-wrap: anywhere;
+        }
+
+        .nav-links .nav-demo {
+          grid-column: 1 / -1;
+          justify-content: flex-start;
+          white-space: normal;
+        }
       }
 
       @media (max-width: 900px) {
@@ -1127,7 +1358,17 @@
             "portrait"
             "approach"
             "stack";
-          padding-top: 64px;
+          gap: 28px;
+          padding: 48px 0 64px;
+        }
+
+        .profile-card {
+          width: min(100%, 420px);
+          justify-self: center;
+        }
+
+        .profile-photo {
+          aspect-ratio: 1;
         }
 
         h1 {
@@ -1135,8 +1376,6 @@
         }
 
         .projects-grid,
-        .cert-grid,
-        .certificate-grid,
         .roadmap-grid {
           grid-template-columns: 1fr;
         }
@@ -1144,6 +1383,10 @@
         .section-heading {
           align-items: start;
           flex-direction: column;
+        }
+
+        .section-grid {
+          gap: 24px;
         }
       }
 
@@ -1153,7 +1396,7 @@
         }
 
         #curriculo {
-          scroll-margin-top: 120px;
+          scroll-margin-top: 88px;
         }
 
         .resume-panel {
@@ -1164,29 +1407,87 @@
           width: min(100% - 28px, 1180px);
         }
 
-        .nav {
-          align-items: flex-start;
-          gap: 12px;
-          flex-direction: column;
+        .hero {
+          gap: 24px;
+          padding: 36px 0 52px;
         }
 
-        .nav-links {
-          width: 100%;
-          gap: 14px;
-          overflow-x: auto;
-          padding-bottom: 2px;
+        .eyebrow {
+          max-width: 100%;
+          margin-bottom: 18px;
+          padding: 8px 12px;
+          font-size: 0.78rem;
+          line-height: 1.5;
         }
 
         .stats {
-          grid-template-columns: 1fr;
+          gap: 8px;
+          margin-top: 28px;
+        }
+
+        .stat {
+          padding-left: 8px;
+        }
+
+        .stat strong {
+          font-size: 1.4rem;
+        }
+
+        .stat span {
+          font-size: 0.78rem;
+          line-height: 1.45;
         }
 
         h1 {
-          font-size: 2.2rem;
+          margin-bottom: 18px;
+          font-size: clamp(1.9rem, 8.5vw, 2.7rem);
+          line-height: 1.12;
+        }
+
+        .hero-text {
+          margin-bottom: 0;
+          font-size: 1rem;
+          line-height: 1.7;
+        }
+
+        .hero .actions {
+          width: 100%;
+          margin-top: 24px;
+        }
+
+        section {
+          padding: 48px 0;
+        }
+
+        .section-title {
+          font-size: clamp(1.7rem, 7vw, 2.1rem);
+          line-height: 1.15;
+        }
+
+        .about-copy,
+        .contact-copy {
+          font-size: 1rem;
+          line-height: 1.75;
+        }
+
+        .card,
+        .roadmap-card,
+        .experience-entry {
+          padding: 20px;
+        }
+
+        .certificate-card .meta-item:not(.meta-identifier) {
+          display: grid;
+          grid-template-columns: max-content minmax(0, 1fr);
+          gap: 8px;
+        }
+
+        .cert-link,
+        .certificate-card .cert-link {
+          min-height: 44px;
         }
 
         .panel-header,
-        .cert-top,
         .experience-header {
           align-items: flex-start;
           flex-direction: column;
@@ -1200,8 +1501,37 @@
           grid-template-columns: 1fr;
         }
       }
+
+      @media (max-width: 480px) {
+        .hero .actions,
+        .project-links,
+        .resume-actions,
+        .contact .actions {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .hero .actions .button,
+        .project-links .button,
+        .resume-actions .button,
+        .contact .actions .button {
+          width: 100%;
+          padding: 12px 16px;
+          overflow-wrap: anywhere;
+          text-align: center;
+        }
+
+        .profile-caption {
+          left: 14px;
+          right: 14px;
+          bottom: 14px;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+      }
     </style>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=20261030-mobile" />
+    <link rel="stylesheet" href="css/brand.css?v=0.6.15" />
   </head>
   <body>
     <div class="language-modal" id="languageModal" role="dialog" aria-modal="true" aria-labelledby="languageChoiceTitle" hidden>
@@ -1217,9 +1547,20 @@
     </div>
     <header class="site-header">
       <nav class="container nav" aria-label="Navegação principal">
-        <a class="brand" href="#inicio">Lorran Daniel</a>
+        <a class="brand" href="#inicio">
+          <img class="brand-avatar" src="img/lorran-daniel-avatar.jpg?v=0.6.15" width="44" height="44" alt="" />
+          <span>Lorran Daniel</span>
+        </a>
 
-        <div class="nav-links">
+        <div class="nav-controls">
+          <select id="languageSelect" class="language-select" aria-label="Selecionar idioma">
+            <option value="pt">PT</option>
+            <option value="en">EN</option>
+          </select>
+          <button class="nav-toggle" id="navigationToggle" type="button" aria-expanded="false" aria-controls="primaryNavigation" aria-label="Abrir menu de navegação" hidden>Menu</button>
+        </div>
+
+        <div class="nav-links" id="primaryNavigation">
           <a href="#sobre">Sobre</a>
           <a href="#experiencia">Experiência</a>
           <a href="#curriculo">Currículo</a>
@@ -1227,13 +1568,8 @@
           <a class="nav-demo" href="projetos/lab.html?project=cloud-soc-guardian&amp;view=demo">
             Cloud SOC Guardian <span aria-hidden="true">↗</span>
           </a>
-          <a href="#certificacoes">Certificações</a>
           <a href="#certificados">Certificados</a>
           <a href="#contato">Contato</a>
-          <select id="languageSelect" class="language-select" aria-label="Selecionar idioma">
-            <option value="pt">PT</option>
-            <option value="en">EN</option>
-          </select>
         </div>
       </nav>
     </header>
@@ -1247,7 +1583,7 @@
 
           <p class="hero-text">
             Profissional de Infraestrutura e Suporte de TI com 4 anos de experiência. Atualmente,
-            presto suporte VIP de TI diretamente a diretores e à liderança executiva da Localiza&amp;Co.
+            presto suporte VIP de TI à Localiza&amp;Co por meio da DXC Technology.
           </p>
 
           <div class="actions">
@@ -1293,7 +1629,7 @@
           <p class="section-kicker">Como trabalho</p>
           <h2 id="workStyleTitle">Diagnóstico, organização e continuidade.</h2>
           <p class="work-intro">
-            Atuo com suporte técnico N1/N2 e atendimento VIP a diretores e à liderança executiva,
+            Atuo com suporte técnico N1/N2 e atendimento VIP à Localiza&amp;Co por meio da DXC Technology,
             combinando administração de infraestrutura, monitoramento proativo e documentação técnica.
           </p>
           <ul class="work-principles">
@@ -1479,6 +1815,11 @@
               aprendizados.
             </p>
           </div>
+
+          <aside class="project-notice" aria-label="Status dos projetos">
+            <strong>Projetos em desenvolvimento</strong>
+            <p>Laboratórios e demonstrações em evolução, com melhorias contínuas na implementação e na documentação.</p>
+          </aside>
 
           <div class="filter-container" aria-label="Filtrar projetos">
             <button class="filter-btn active" type="button" data-filter="all">Todos</button>
@@ -1692,40 +2033,38 @@
         </div>
       </section>
 
-      <section id="certificacoes" class="filter-section">
+      <section id="certificados" class="filter-section">
         <div class="container">
           <div class="section-heading">
             <div>
-              <p class="section-kicker">Certificações</p>
-              <h2 class="section-title">Credenciais em destaque</h2>
+              <p class="section-kicker">Certificados</p>
+              <h2 class="section-title">Formação complementar</h2>
             </div>
             <p>
-              Certificações, credenciais e reconhecimentos com validação explícita no certificado,
-              priorizando cybersecurity, cloud, plataforma Falcon e comunicação profissional.
+              Certificados de cursos, treinamentos e proficiência.
             </p>
           </div>
 
-          <div class="filter-container" aria-label="Filtrar certificações">
+          <div class="filter-container" aria-label="Filtrar certificados">
             <button class="filter-btn active" type="button" data-filter="all">Todos</button>
             <button class="filter-btn" type="button" data-filter="cloud">Cloud</button>
             <button class="filter-btn" type="button" data-filter="cyber">Cybersecurity</button>
             <button class="filter-btn" type="button" data-filter="ia">IA</button>
             <button class="filter-btn" type="button" data-filter="english">Inglês</button>
+            <button class="filter-btn" type="button" data-filter="governance">Governança</button>
           </div>
 
-          <div class="cert-grid">
-            <article class="cert-card" data-category="cloud ia">
-              <div class="cert-top">
-                <span class="badge">Cloud & IA</span>
-                <span class="cert-date">PDF</span>
-              </div>
-              <div class="cert-org">AWS</div>
-              <h3>AWS AI Practitioner - Discovery Day</h3>
+          <div class="certificate-grid">
+            <article class="certificate-card" data-category="cloud ia">
+              <span class="badge">Cloud & IA</span>
+              <h3 translate="no">AWS AI Practitioner - Discovery Day</h3>
               <p>Fundamentos de inteligência artificial aplicada ao ecossistema AWS.</p>
               <div class="meta-list">
+                <div class="meta-item"><strong>Emissor</strong><span>AWS</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>09/08/2025</span></div>
                 <div class="meta-item"><strong>Carga horária</strong><span>4 horas</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>8A79068F-35A1-48F4-BA66-CEAE7CDE9C5A</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>8A79068F-35A1-48F4-BA66-CEAE7CDE9C5A</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1737,18 +2076,16 @@
               </a>
             </article>
 
-            <article class="cert-card" data-category="cyber">
-              <div class="cert-top">
-                <span class="badge">Cybersecurity</span>
-                <span class="cert-date">PDF</span>
-              </div>
-              <div class="cert-org">Hack & Fix Academy</div>
-              <h3>Certified Phishing Prevention Specialist (CPPS)</h3>
+            <article class="certificate-card" data-category="cyber">
+              <span class="badge">Cybersecurity</span>
+              <h3 translate="no">Certified Phishing Prevention Specialist (CPPS)</h3>
               <p>Reconhecimento em prevenção de phishing e conscientização defensiva.</p>
               <div class="meta-list">
+                <div class="meta-item"><strong>Emissor</strong><span>Hack &amp; Fix Academy</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>20/12/2025</span></div>
-                <div class="meta-item"><strong>Carga horária</strong><span>Não informada no certificado</span></div>
-                <div class="meta-item"><strong>ID</strong><span>4119-1480-2348-3994</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>4119-1480-2348-3994</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1760,18 +2097,16 @@
               </a>
             </article>
 
-            <article class="cert-card" data-category="cyber">
-              <div class="cert-top">
-                <span class="badge">EDR & SecOps</span>
-                <span class="cert-date">PDF</span>
-              </div>
-              <div class="cert-org">CrowdStrike</div>
-              <h3>FALCON 101: Falcon Platform Essentials</h3>
+            <article class="certificate-card" data-category="cyber">
+              <span class="badge">EDR & SecOps</span>
+              <h3 translate="no">FALCON 101: Falcon Platform Essentials</h3>
               <p>Fundamentos essenciais da plataforma Falcon para operação de segurança.</p>
               <div class="meta-list">
+                <div class="meta-item"><strong>Emissor</strong><span>CrowdStrike</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>29/12/2025</span></div>
-                <div class="meta-item"><strong>Carga horária</strong><span>Não informada no certificado</span></div>
-                <div class="meta-item"><strong>Certificado</strong><span>C488389</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>C488389</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1783,18 +2118,16 @@
               </a>
             </article>
 
-            <article class="cert-card" data-category="cyber">
-              <div class="cert-top">
-                <span class="badge">Cybersecurity</span>
-                <span class="cert-date">PDF</span>
-              </div>
-              <div class="cert-org">Hack & Fix Academy</div>
-              <h3>Cybersecurity Career Starter Certification (CCSC)</h3>
+            <article class="certificate-card" data-category="cyber">
+              <span class="badge">Cybersecurity</span>
+              <h3 translate="no">Cybersecurity Career Starter Certification (CCSC)</h3>
               <p>Reconhecimento de conclusão em fundamentos de carreira em cybersecurity.</p>
               <div class="meta-list">
+                <div class="meta-item"><strong>Emissor</strong><span>Hack &amp; Fix Academy</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>20/12/2025</span></div>
-                <div class="meta-item"><strong>Carga horária</strong><span>Não informada no certificado</span></div>
-                <div class="meta-item"><strong>ID</strong><span>2130-2916-6036-4119</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>2130-2916-6036-4119</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1806,18 +2139,16 @@
               </a>
             </article>
 
-            <article class="cert-card" data-category="cyber">
-              <div class="cert-top">
-                <span class="badge">EDR & SecOps</span>
-                <span class="cert-date">PDF</span>
-              </div>
-              <div class="cert-org">CrowdStrike</div>
-              <h3>FALCON 100: Falcon Platform Architecture Overview</h3>
+            <article class="certificate-card" data-category="cyber">
+              <span class="badge">EDR & SecOps</span>
+              <h3 translate="no">FALCON 100: Falcon Platform Architecture Overview</h3>
               <p>Visão geral de arquitetura da plataforma Falcon para segurança e proteção de endpoints.</p>
               <div class="meta-list">
+                <div class="meta-item"><strong>Emissor</strong><span>CrowdStrike</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>23/12/2025</span></div>
-                <div class="meta-item"><strong>Carga horária</strong><span>Não informada no certificado</span></div>
-                <div class="meta-item"><strong>Certificado</strong><span>C485022</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>C485022</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1829,19 +2160,16 @@
               </a>
             </article>
 
-            <article class="cert-card" data-category="english">
-              <div class="cert-top">
-                <span class="badge">Inglês</span>
-                <span class="cert-date">PDF</span>
-              </div>
-              <div class="cert-org">EF SET</div>
-              <h3>EF SET Certificate</h3>
-              <p>Certificado de proficiência em inglês com resultado C1 Advanced.</p>
+            <article class="certificate-card" data-category="english">
+              <span class="badge">Inglês</span>
+              <h3 translate="no">EF SET Certificate</h3>
+              <p>Proficiência em inglês: 63/100 (C1 Advanced), com leitura C2 e compreensão auditiva B2.</p>
               <div class="meta-list">
+                <div class="meta-item"><strong>Emissor</strong><span>EF SET</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>20/12/2025</span></div>
-                <div class="meta-item"><strong>Resultado</strong><span>63/100 | C1 Advanced</span></div>
-                <div class="meta-item"><strong>Detalhe</strong><span>Reading C2 | Listening B2</span></div>
-                <div class="meta-item"><strong>Validação</strong><span>cert.efset.org/jtHw45</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>cert.efset.org/jtHw45</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1852,40 +2180,17 @@
                 Ver detalhes
               </a>
             </article>
-          </div>
-        </div>
-      </section>
 
-      <section id="certificados" class="filter-section">
-        <div class="container">
-          <div class="section-heading">
-            <div>
-              <p class="section-kicker">Certificados de Cursos</p>
-              <h2 class="section-title">Formação complementar</h2>
-            </div>
-            <p>
-              Certificados de conclusão com carga horária, data, instrutor e código quando esses
-              dados aparecem no próprio documento.
-            </p>
-          </div>
-
-          <div class="filter-container" aria-label="Filtrar certificados de cursos">
-            <button class="filter-btn active" type="button" data-filter="all">Todos</button>
-            <button class="filter-btn" type="button" data-filter="cloud">Cloud</button>
-            <button class="filter-btn" type="button" data-filter="cyber">Cybersecurity</button>
-            <button class="filter-btn" type="button" data-filter="ia">IA</button>
-            <button class="filter-btn" type="button" data-filter="governance">Governança</button>
-          </div>
-
-          <div class="certificate-grid">
             <article class="certificate-card" data-category="cloud">
               <span class="badge">AWS</span>
-              <h3>AWS Skill Builder Learner Guide</h3>
+              <h3 translate="no">AWS Skill Builder Learner Guide</h3>
               <p>Treinamento introdutório para serviços, fundamentos e modelos de uso da AWS.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>AWS Skill Builder</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>09/07/2024</span></div>
-                <div class="meta-item"><strong>Carga horária</strong><span>Não informada no certificado</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1899,13 +2204,14 @@
 
             <article class="certificate-card" data-category="cloud">
               <span class="badge">Microsoft Azure</span>
-              <h3>Introdução à Infraestrutura de Nuvem (AZ-900)</h3>
+              <h3 translate="no">Introdução à Infraestrutura de Nuvem (AZ-900)</h3>
               <p>Fundamentos de infraestrutura, serviços e conceitos de nuvem no Microsoft Azure.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Ka Solution</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>29/11/2025</span></div>
                 <div class="meta-item"><strong>Carga horária</strong><span>8 horas</span></div>
-                <div class="meta-item"><strong>Código</strong><span>5F7C6B5F-E32A-4CBA-8CB6-4CF0934EDAE8</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>5F7C6B5F-E32A-4CBA-8CB6-4CF0934EDAE8</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1919,13 +2225,14 @@
 
             <article class="certificate-card" data-category="cloud">
               <span class="badge">Microsoft Azure</span>
-              <h3>Introdução ao Microsoft Azure Data (DP-900)</h3>
+              <h3 translate="no">Introdução ao Microsoft Azure Data (DP-900)</h3>
               <p>Fundamentos de dados, serviços analíticos e conceitos de banco de dados no Azure.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Ka Solution</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>13/12/2025</span></div>
                 <div class="meta-item"><strong>Carga horária</strong><span>8 horas</span></div>
-                <div class="meta-item"><strong>Código</strong><span>8BD205D7-8459-4DE4-BCD0-D64E3DC9AC0B</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>8BD205D7-8459-4DE4-BCD0-D64E3DC9AC0B</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1939,14 +2246,14 @@
 
             <article class="certificate-card" data-category="cyber">
               <span class="badge">IAM</span>
-              <h3>Identity and Access Management (IAM)</h3>
+              <h3 translate="no">Identity and Access Management (IAM)</h3>
               <p>Gestão de identidade, acessos, permissões e governança de credenciais.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Udemy</span></div>
                 <div class="meta-item"><strong>Instrutor</strong><span>Rassoul Zadeh</span></div>
                 <div class="meta-item"><strong>Data</strong><span>07/01/2026</span></div>
-                <div class="meta-item"><strong>Duração</strong><span>10,5 horas</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>UC-05eec049-1af8-44e1-b360-dce2cd3cf809</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span>10,5 horas</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>UC-05eec049-1af8-44e1-b360-dce2cd3cf809</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1960,14 +2267,14 @@
 
             <article class="certificate-card" data-category="cyber">
               <span class="badge">PAM</span>
-              <h3>Privileged Account (Access) Management (PAM)</h3>
+              <h3 translate="no">Privileged Account (Access) Management (PAM)</h3>
               <p>Controle e proteção de contas privilegiadas em ambientes corporativos.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Udemy</span></div>
                 <div class="meta-item"><strong>Instrutor</strong><span>Rassoul Zadeh</span></div>
                 <div class="meta-item"><strong>Data</strong><span>23/01/2026</span></div>
-                <div class="meta-item"><strong>Duração</strong><span>12,5 horas</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>UC-5ab5f75b-7b6c-4a1b-869f-9ffd9e54f76c</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span>12,5 horas</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>UC-5ab5f75b-7b6c-4a1b-869f-9ffd9e54f76c</span></div>
               </div>
               <a
                 class="cert-link"
@@ -1981,14 +2288,14 @@
 
             <article class="certificate-card" data-category="governance">
               <span class="badge">GRC</span>
-              <h3>COSO | Gestão de Risco Corporativo e Controles Internos</h3>
+              <h3 translate="no">COSO | Gestão de Risco Corporativo e Controles Internos</h3>
               <p>Fundamentos de gestão de risco, controles internos e governança corporativa.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Udemy</span></div>
                 <div class="meta-item"><strong>Instrutor</strong><span>Uires Tapajós</span></div>
                 <div class="meta-item"><strong>Data</strong><span>05/01/2026</span></div>
-                <div class="meta-item"><strong>Duração</strong><span>9 horas</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>UC-8dcbc3b1-239e-48ca-9471-f0e410e869ab</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span>9 horas</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>UC-8dcbc3b1-239e-48ca-9471-f0e410e869ab</span></div>
               </div>
               <a
                 class="cert-link"
@@ -2002,12 +2309,14 @@
 
             <article class="certificate-card" data-category="governance">
               <span class="badge">ITSM</span>
-              <h3>Gestão e Governança na Prática: Cobit, ITIL, Scrum e PMBOK</h3>
+              <h3 translate="no">Gestão e Governança na Prática: Cobit, ITIL, Scrum e PMBOK</h3>
               <p>Boas práticas para gestão de serviços, suporte, operação e melhoria contínua.</p>
               <div class="meta-list">
+                <div class="meta-item"><strong>Emissor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span class="missing-value" role="img" aria-label="Não informado">—</span></div>
                 <div class="meta-item"><strong>Data</strong><span>22/11/2025</span></div>
                 <div class="meta-item"><strong>Carga horária</strong><span>4 horas</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>53B20FAC-785A-445E-8714-8DB26F110382</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>53B20FAC-785A-445E-8714-8DB26F110382</span></div>
               </div>
               <a
                 class="cert-link"
@@ -2021,14 +2330,14 @@
 
             <article class="certificate-card" data-category="ia">
               <span class="badge">IA</span>
-              <h3>Copilot Essentials in Microsoft Office</h3>
+              <h3 translate="no">Copilot Essentials in Microsoft Office</h3>
               <p>Uso de Copilot e IA aplicada à produtividade no Microsoft Office.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Udemy</span></div>
                 <div class="meta-item"><strong>Instrutor</strong><span>Simon Sez IT</span></div>
                 <div class="meta-item"><strong>Data</strong><span>15/01/2026</span></div>
-                <div class="meta-item"><strong>Duração</strong><span>1 hora</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>UC-6ab8e454-229f-4c7d-8ce1-f598e3137b4a</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span>1 hora</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>UC-6ab8e454-229f-4c7d-8ce1-f598e3137b4a</span></div>
               </div>
               <a
                 class="cert-link"
@@ -2042,14 +2351,14 @@
 
             <article class="certificate-card" data-category="ia">
               <span class="badge">IA</span>
-              <h3>Generative AI Unleashed: Exploring Possibilities and Future</h3>
+              <h3 translate="no">Generative AI Unleashed: Exploring Possibilities and Future</h3>
               <p>Possibilidades, tendências e aplicações de inteligência artificial generativa.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Udemy</span></div>
                 <div class="meta-item"><strong>Instrutor</strong><span>Learnsector LLP</span></div>
                 <div class="meta-item"><strong>Data</strong><span>15/01/2026</span></div>
-                <div class="meta-item"><strong>Duração</strong><span>1 hora</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>UC-89cdb29e-b0d9-4ea6-aa20-72dff664411a</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span>1 hora</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>UC-89cdb29e-b0d9-4ea6-aa20-72dff664411a</span></div>
               </div>
               <a
                 class="cert-link"
@@ -2063,14 +2372,14 @@
 
             <article class="certificate-card" data-category="ia">
               <span class="badge">IA</span>
-              <h3>Intro to AI Agents and Agentic AI</h3>
+              <h3 translate="no">Intro to AI Agents and Agentic AI</h3>
               <p>Conceitos de agentes de IA, automação inteligente e fluxos agentivos.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Udemy</span></div>
                 <div class="meta-item"><strong>Instrutor</strong><span>365 Careers</span></div>
                 <div class="meta-item"><strong>Data</strong><span>15/01/2026</span></div>
-                <div class="meta-item"><strong>Duração</strong><span>2 horas</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>UC-9798fe20-2200-429b-8aff-1510290c3a68</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span>2 horas</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>UC-9798fe20-2200-429b-8aff-1510290c3a68</span></div>
               </div>
               <a
                 class="cert-link"
@@ -2084,14 +2393,14 @@
 
             <article class="certificate-card" data-category="ia automation">
               <span class="badge">IA</span>
-              <h3>Practical Vibe Coding AI-Powered Software Development</h3>
+              <h3 translate="no">Practical Vibe Coding AI-Powered Software Development</h3>
               <p>Desenvolvimento assistido por IA, prototipação e aceleração de fluxo técnico.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Udemy</span></div>
-                <div class="meta-item"><strong>Instrutores</strong><span>Gustavo Escobar Henríquez, Digital Life Academy</span></div>
+                <div class="meta-item"><strong>Instrutor</strong><span>Gustavo Escobar Henríquez, Digital Life Academy</span></div>
                 <div class="meta-item"><strong>Data</strong><span>15/01/2026</span></div>
-                <div class="meta-item"><strong>Duração</strong><span>2,5 horas</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>UC-4968e73e-cd7b-4df6-82a0-508cdd3c69d6</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span>2,5 horas</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>UC-4968e73e-cd7b-4df6-82a0-508cdd3c69d6</span></div>
               </div>
               <a
                 class="cert-link"
@@ -2105,14 +2414,14 @@
 
             <article class="certificate-card" data-category="ia">
               <span class="badge">IA</span>
-              <h3>Prompt Engineering for Work</h3>
+              <h3 translate="no">Prompt Engineering for Work</h3>
               <p>Boas práticas de prompts para produtividade, documentação e tarefas profissionais.</p>
               <div class="meta-list">
                 <div class="meta-item"><strong>Emissor</strong><span>Udemy</span></div>
                 <div class="meta-item"><strong>Instrutor</strong><span>Steve Ballinger, MBA</span></div>
                 <div class="meta-item"><strong>Data</strong><span>15/01/2026</span></div>
-                <div class="meta-item"><strong>Duração</strong><span>1,5 horas</span></div>
-                <div class="meta-item"><strong>Credencial</strong><span>UC-137c7d1e-3a97-462a-80d5-acf137ac62f4</span></div>
+                <div class="meta-item"><strong>Carga horária</strong><span>1,5 horas</span></div>
+                <div class="meta-item meta-identifier"><strong>Credencial</strong><span>UC-137c7d1e-3a97-462a-80d5-acf137ac62f4</span></div>
               </div>
               <a
                 class="cert-link"
@@ -2139,12 +2448,21 @@
             automação e segurança da informação.
           </p>
 
-          <div class="actions">
-            <a class="button primary" href="http://www.linkedin.com/in/lorrandaniel" target="_blank" rel="noreferrer">
+          <div class="contact-methods" aria-label="Opções de contato">
+            <a class="button primary" href="https://www.linkedin.com/in/lorrandaniel" target="_blank" rel="noopener noreferrer">
               LinkedIn
             </a>
-            <a class="button" href="mailto:lorrandaniel.silva.work@gmail.com">lorrandaniel.silva.work@gmail.com</a>
+            <a class="button primary" id="contactEmailButton" href="mailto:lorrandaniel.silva.work@gmail.com" aria-describedby="contactEmailHelp">Contato por e-mail</a>
           </div>
+          <p class="contact-address">lorrandaniel.silva.work@gmail.com</p>
+          <p class="contact-help" id="contactEmailHelp">O botão de e-mail abre o aplicativo ou serviço configurado no seu dispositivo.</p>
+          <p class="contact-help" id="contactEmailFallback" hidden>
+            <span>Se o aplicativo não abrir,</span>
+            <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lorrandaniel.silva.work%40gmail.com" target="_blank" rel="noopener noreferrer">escreva pelo Gmail no navegador</a>.
+          </p>
+          <noscript>
+            <p class="contact-help"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lorrandaniel.silva.work%40gmail.com" target="_blank" rel="noopener noreferrer">Escrever pelo Gmail no navegador</a></p>
+          </noscript>
         </div>
       </section>
     </main>
@@ -2160,9 +2478,14 @@
         const cards = section.querySelectorAll("article[data-category]");
 
         buttons.forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.classList.contains("active")));
           button.addEventListener("click", () => {
-            buttons.forEach((item) => item.classList.remove("active"));
+            buttons.forEach((item) => {
+              item.classList.remove("active");
+              item.setAttribute("aria-pressed", "false");
+            });
             button.classList.add("active");
+            button.setAttribute("aria-pressed", "true");
 
             const filterValue = button.dataset.filter;
 
@@ -2185,6 +2508,6 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     </script>
-    <script src="js/portfolio-i18n.js?v=20261030-index"></script>
+    <script src="js/portfolio-i18n.js?v=0.6.14"></script>
   </body>
 </html>

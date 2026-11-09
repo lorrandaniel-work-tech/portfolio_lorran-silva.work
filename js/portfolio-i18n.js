@@ -11,15 +11,14 @@
     "Experiência": "Experience",
     "Currículo": "Resume",
     "Projetos": "Projects",
-    "Certificações": "Certifications",
     "Certificados": "Certificates",
     "Contato": "Contact",
     "PORTFÓLIO / PORTFOLIO": "PORTFOLIO / PORTFOLIO",
     "Escolha seu idioma": "Choose your language",
     "Infraestrutura | Cloud | Cybersecurity": "Infrastructure | Cloud | Cybersecurity",
     "Portfólio técnico em infraestrutura, cloud e segurança.": "Infrastructure, cloud, and security portfolio.",
-    "Profissional de Infraestrutura e Suporte de TI com 4 anos de experiência. Atualmente, presto suporte VIP de TI diretamente a diretores e à liderança executiva da Localiza&Co.":
-      "IT Infrastructure and Support professional with 4 years of experience. I currently provide VIP IT support directly to directors and executive leadership at Localiza&Co.",
+    "Profissional de Infraestrutura e Suporte de TI com 4 anos de experiência. Atualmente, presto suporte VIP de TI à Localiza&Co por meio da DXC Technology.":
+      "IT Infrastructure and Support professional with 4 years of experience. I currently provide VIP IT support to Localiza&Co through DXC Technology.",
     "Ver projetos": "View projects",
     "Abrir Cloud SOC Guardian": "Open Cloud SOC Guardian",
     "Entrar em contato": "Get in touch",
@@ -33,8 +32,8 @@
     "Stack principal": "Core stack",
     "Como trabalho": "How I work",
     "Diagnóstico, organização e continuidade.": "Diagnosis, organization, and service continuity.",
-    "Atuo com suporte técnico N1/N2 e atendimento VIP a diretores e à liderança executiva, combinando administração de infraestrutura, monitoramento proativo e documentação técnica.":
-      "I provide Level 1 and Level 2 technical support and VIP support to directors and executive leadership, combining infrastructure administration, proactive monitoring, and technical documentation.",
+    "Atuo com suporte técnico N1/N2 e atendimento VIP à Localiza&Co por meio da DXC Technology, combinando administração de infraestrutura, monitoramento proativo e documentação técnica.":
+      "I provide Level 1 and Level 2 technical support and VIP support to Localiza&Co through DXC Technology, combining infrastructure administration, proactive monitoring, and technical documentation.",
     "Diagnóstico e implantação": "Diagnosis and deployment",
     "Investigo incidentes e preparo ambientes, de hardware e servidores à personalização e implantação em massa de imagens Windows com WDS/MDT.":
       "I investigate incidents and prepare environments, from hardware and servers to Windows image customization and bulk deployment using WDS/MDT.",
@@ -92,6 +91,10 @@
     "Pré-visualização do currículo de Lorran Daniel em português": "Preview of Lorran Daniel's resume in Portuguese",
     "Pré-visualização do currículo de Lorran Daniel em inglês": "Preview of Lorran Daniel's resume in English",
     "Portfólio técnico": "Technical portfolio",
+    "Status dos projetos": "Project status",
+    "Projetos em desenvolvimento": "Projects in development",
+    "Laboratórios e demonstrações em evolução, com melhorias contínuas na implementação e na documentação.":
+      "Labs and demos are evolving, with ongoing improvements to implementation and documentation.",
     "Cada projeto deve ter repositório, prints, objetivo, arquitetura, tecnologias e aprendizados.":
       "Each project includes a repository, screenshots, goals, architecture, technologies, and key learnings.",
     "Filtrar projetos": "Filter projects",
@@ -148,11 +151,9 @@
       "Automation, containers, pipelines, and security integrated into the technical lifecycle.",
     "Monitoramento, métricas, alertas e dashboards orientados a operação.":
       "Monitoring, metrics, alerts, and operations-focused dashboards.",
-    "Credenciais em destaque": "Featured credentials",
-    "Certificações, credenciais e reconhecimentos com validação explícita no certificado, priorizando cybersecurity, cloud, plataforma Falcon e comunicação profissional.":
-      "Certifications, credentials, and recognitions with explicit certificate validation, focused on cybersecurity, cloud, the Falcon platform, and professional communication.",
     "Inglês": "English",
     "Cloud & IA": "Cloud & AI",
+    "IA": "AI",
     "Fundamentos de inteligência artificial aplicada ao ecossistema AWS.":
       "Fundamentals of artificial intelligence applied to the AWS ecosystem.",
     "Data": "Date",
@@ -169,15 +170,16 @@
       "Recognition of completion in cybersecurity career fundamentals.",
     "Visão geral de arquitetura da plataforma Falcon para segurança e proteção de endpoints.":
       "Overview of Falcon platform architecture for endpoint security and protection.",
-    "Certificado de proficiência em inglês com resultado C1 Advanced.":
-      "English proficiency certificate with a C1 Advanced result.",
+    "Proficiência em inglês: 63/100 (C1 Advanced), com leitura C2 e compreensão auditiva B2.":
+      "English proficiency: 63/100 (C1 Advanced), with C2 in reading and B2 in listening.",
     "Resultado": "Score",
     "Detalhe": "Detail",
     "Validação": "Verification",
-    "Certificados de Cursos": "Course certificates",
     "Formação complementar": "Additional training",
-    "Certificados de conclusão com carga horária, data, instrutor e código quando esses dados aparecem no próprio documento.":
-      "Completion certificates with course hours, date, instructor, and code when those details appear in the original document.",
+    "Certificados de cursos, treinamentos e proficiência.":
+      "Course, training, and proficiency certificates.",
+    "Não informado": "Not provided",
+    "Filtrar certificados": "Filter certificates",
     "Governança": "Governance",
     "Treinamento introdutório para serviços, fundamentos e modelos de uso da AWS.":
       "Introductory training on AWS services, foundations, and usage models.",
@@ -218,6 +220,12 @@
     "Voltar ao topo": "Back to top",
     "↑ Topo": "↑ Top",
     "Selecionar idioma": "Select language",
+    "Opções de contato": "Contact options",
+    "Contato por e-mail": "Contact by email",
+    "O botão de e-mail abre o aplicativo ou serviço configurado no seu dispositivo.":
+      "The email button opens the app or service configured on your device.",
+    "Se o aplicativo não abrir,": "If the app does not open,",
+    "escreva pelo Gmail no navegador": "write in Gmail in your browser",
   };
 
   function normalized(value) {
@@ -237,10 +245,14 @@
       if (["SCRIPT", "STYLE", "CODE", "PRE"].includes(parentTag)) {
         return;
       }
+      if (node.parentElement?.closest('[translate="no"]')) {
+        return;
+      }
 
       const source = node.nodeValue || "";
       const key = normalized(source);
-      const translated = translations[key];
+      const hours = /^(\d+(?:,\d+)?) horas?$/.exec(key);
+      const translated = translations[key] || (hours && `${hours[1].replace(",", ".")} ${hours[1] === "1" ? "hour" : "hours"}`);
       if (!translated) {
         return;
       }
@@ -309,9 +321,76 @@
 
     modal.hidden = false;
     document.body.style.overflow = "hidden";
+    const choices = [...modal.querySelectorAll("[data-language-choice]")];
+    choices[0]?.focus({ preventScroll: true });
+    modal.addEventListener("keydown", (event) => {
+      if (event.key !== "Tab" || !choices.length) {
+        return;
+      }
+      if (event.shiftKey && document.activeElement === choices[0]) {
+        event.preventDefault();
+        choices[choices.length - 1].focus();
+      } else if (!event.shiftKey && document.activeElement === choices[choices.length - 1]) {
+        event.preventDefault();
+        choices[0].focus();
+      }
+    });
     modal.querySelectorAll("[data-language-choice]").forEach((button) => {
       button.addEventListener("click", () => navigateToLanguage(button.dataset.languageChoice));
     });
+  }
+
+  function setupContactActions() {
+    const button = document.getElementById("contactEmailButton");
+    const fallback = document.getElementById("contactEmailFallback");
+    if (!button || !fallback) {
+      return;
+    }
+
+    // Keep the native mailto action: browsers do not report whether an email app opened.
+    button.addEventListener("click", () => {
+      fallback.hidden = false;
+      button.setAttribute("aria-describedby", "contactEmailHelp contactEmailFallback");
+    });
+  }
+
+  function setupNavigation() {
+    const toggle = document.getElementById("navigationToggle");
+    const links = document.getElementById("primaryNavigation");
+    if (!toggle || !links) {
+      return;
+    }
+
+    const compact = window.matchMedia("(max-width: 1100px)");
+    function setExpanded(expanded) {
+      const isExpanded = compact.matches && expanded;
+      toggle.hidden = !compact.matches;
+      toggle.setAttribute("aria-expanded", String(isExpanded));
+      toggle.setAttribute("aria-label", language === "en"
+        ? (isExpanded ? "Close navigation menu" : "Open navigation menu")
+        : (isExpanded ? "Fechar menu de navegação" : "Abrir menu de navegação"));
+      links.hidden = compact.matches && !isExpanded;
+    }
+
+    toggle.addEventListener("click", () => {
+      setExpanded(toggle.getAttribute("aria-expanded") !== "true");
+    });
+    links.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setExpanded(false));
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setExpanded(false);
+        toggle.focus();
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".nav")) {
+        setExpanded(false);
+      }
+    });
+    compact.addEventListener("change", () => setExpanded(false));
+    setExpanded(false);
   }
 
   function localizeMetadata() {
@@ -334,6 +413,20 @@
     });
   }
 
+  function redirectLegacyCertificateHash() {
+    if (window.location.hash !== "#certificacoes") {
+      return;
+    }
+
+    const target = new URL(window.location.href);
+    target.hash = "certificados";
+    window.history.replaceState(window.history.state, "", target.href);
+    document.getElementById("certificados")?.scrollIntoView({ block: "start" });
+  }
+
+  window.addEventListener("hashchange", redirectLegacyCertificateHash);
+  redirectLegacyCertificateHash();
+
   if (language === "en") {
     localizeMetadata();
     translateTextNodes(document.body);
@@ -347,5 +440,7 @@
     resumeDownload.href = `curriculos/${filename}`;
     resumeDownload.download = filename;
   }
+  setupNavigation();
+  setupContactActions();
   setupLanguageControls();
 })();
